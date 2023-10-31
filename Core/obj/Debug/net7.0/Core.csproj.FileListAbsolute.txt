@@ -1,0 +1,11 @@
+C:\Users\Маша\source\repos\CatalogExplorer\Core\bin\Debug\net7.0\Core.deps.json
+C:\Users\Маша\source\repos\CatalogExplorer\Core\bin\Debug\net7.0\Core.dll
+C:\Users\Маша\source\repos\CatalogExplorer\Core\bin\Debug\net7.0\Core.pdb
+C:\Users\Маша\source\repos\CatalogExplorer\Core\obj\Debug\net7.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Маша\source\repos\CatalogExplorer\Core\obj\Debug\net7.0\Core.AssemblyInfoInputs.cache
+C:\Users\Маша\source\repos\CatalogExplorer\Core\obj\Debug\net7.0\Core.AssemblyInfo.cs
+C:\Users\Маша\source\repos\CatalogExplorer\Core\obj\Debug\net7.0\Core.csproj.CoreCompileInputs.cache
+C:\Users\Маша\source\repos\CatalogExplorer\Core\obj\Debug\net7.0\Core.dll
+C:\Users\Маша\source\repos\CatalogExplorer\Core\obj\Debug\net7.0\refint\Core.dll
+C:\Users\Маша\source\repos\CatalogExplorer\Core\obj\Debug\net7.0\Core.pdb
+C:\Users\Маша\source\repos\CatalogExplorer\Core\obj\Debug\net7.0\ref\Core.dll
