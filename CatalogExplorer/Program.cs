@@ -1,3 +1,5 @@
+using BLL.Services;
+using BLL.Services.Interfaces;
 using CatalogExplorer.Extensions;
 using Core.Entity;
 using DAL.Extensions;
@@ -12,6 +14,7 @@ builder.Services.AddControllersWithViews();
 
 //builder.Services.ConfigureDataAccessLayer();
 builder.Services.AddScoped<IBaseRepository<Catalog>, CatalogRepository>();
+builder.Services.AddScoped<ICatalogService, CatalogService>();
 
 var app = builder.Build();
 

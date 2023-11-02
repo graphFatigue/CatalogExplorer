@@ -9,3 +9,9 @@ C:\Users\Маша\source\repos\CatalogExplorer\BLL\obj\Debug\net7.0\BLL.dll
 C:\Users\Маша\source\repos\CatalogExplorer\BLL\obj\Debug\net7.0\refint\BLL.dll
 C:\Users\Маша\source\repos\CatalogExplorer\BLL\obj\Debug\net7.0\BLL.pdb
 C:\Users\Маша\source\repos\CatalogExplorer\BLL\obj\Debug\net7.0\ref\BLL.dll
+C:\Users\Маша\source\repos\CatalogExplorer\BLL\bin\Debug\net7.0\Core.dll
+C:\Users\Маша\source\repos\CatalogExplorer\BLL\bin\Debug\net7.0\DAL.dll
+C:\Users\Маша\source\repos\CatalogExplorer\BLL\bin\Debug\net7.0\Core.pdb
+C:\Users\Маша\source\repos\CatalogExplorer\BLL\bin\Debug\net7.0\DAL.pdb
+C:\Users\Маша\source\repos\CatalogExplorer\BLL\obj\Debug\net7.0\BLL.csproj.AssemblyReference.cache
+C:\Users\Маша\source\repos\CatalogExplorer\BLL\obj\Debug\net7.0\BLL.csproj.CopyComplete

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Core.Entity.Catalog>
+
+<h2>Catalogs</h2>
+
+@if (Model != null && Model.Any())
+{
+    <ul>
+        @foreach (var catalog in Model)
+        {
+            <li>
+                <a asp-action="GetCatalog" asp-route-id="@catalog.Id">@catalog.Name</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No catalogs found.</p>
+}
+
+<a asp-action="Save" asp-route-id="0" asp-route-parentCatalogId="Model.FirstOrDefault()?.ParentCatalogId">Create New Catalog</a>

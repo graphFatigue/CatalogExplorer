@@ -3,13 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogExplorer", "CatalogExplorer\CatalogExplorer.csproj", "{8CEAC26A-004F-4C28-868D-7A0DF9D1CF36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatalogExplorer", "CatalogExplorer\CatalogExplorer.csproj", "{8CEAC26A-004F-4C28-868D-7A0DF9D1CF36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{831B15FE-C7CA-4447-9ABE-46919BECA371}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{831B15FE-C7CA-4447-9ABE-46919BECA371}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CCB95E2F-1584-458D-AA7B-AC3C60BE740F} = {CCB95E2F-1584-458D-AA7B-AC3C60BE740F}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{DF51C4C0-0932-498D-9665-0BDBE6C19914}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{DF51C4C0-0932-498D-9665-0BDBE6C19914}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{CCB95E2F-1584-458D-AA7B-AC3C60BE740F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{CCB95E2F-1584-458D-AA7B-AC3C60BE740F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -80,3 +80,5 @@ C:\Users\Маша\source\repos\CatalogExplorer\CatalogExplorer\bin\Debug\net7.0\
 C:\Users\Маша\source\repos\CatalogExplorer\CatalogExplorer\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Маша\source\repos\CatalogExplorer\CatalogExplorer\bin\Debug\net7.0\Mono.TextTemplating.dll
 C:\Users\Маша\source\repos\CatalogExplorer\CatalogExplorer\bin\Debug\net7.0\System.CodeDom.dll
+C:\Users\Маша\source\repos\CatalogExplorer\CatalogExplorer\bin\Debug\net7.0\BLL.dll
+C:\Users\Маша\source\repos\CatalogExplorer\CatalogExplorer\bin\Debug\net7.0\BLL.pdb

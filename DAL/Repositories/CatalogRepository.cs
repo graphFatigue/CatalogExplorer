@@ -37,6 +37,11 @@ namespace DAL.Repositories
             return await _dbSet.ToListAsync();
         }
 
+        public async Task<Catalog?> GetByIdAsync(int id)
+        {
+            return await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task<Catalog> UpdateAsync(Catalog entity)
         {
             _dbSet.Update(entity);

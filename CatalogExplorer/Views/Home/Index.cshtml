@@ -1,8 +1,17 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<Core.Entity.Catalog>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Catalogs</h2>
+
+<ul>
+    @foreach (var catalog in Model.Where(c => c.ParentCatalogId == null))
+    {
+        <li>
+            <a asp-controller="Catalog" asp-action="GetCatalog" asp-route-id="@catalog.Id">@catalog.Name</a>
+            @if (catalog.ChildrenCatalogs != null && catalog.ChildrenCatalogs.Any())
+            {
+                @Html.Partial("_CatalogRecursive", catalog.ChildrenCatalogs)
+            }
+        </li>
+    }
+</ul>
+<a asp-controller="Catalog" asp-action="Save" asp-route-id="0" asp-route-parentCatalogId="null">Create New Catalog</a>

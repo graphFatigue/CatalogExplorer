@@ -1,0 +1,21 @@
+﻿@model Core.Entity.Catalog
+
+<h2>Catalog Details</h2>
+
+@if (Model != null)
+{
+    <dl>
+        <dt>Name:</dt>
+        <dd>@Model.Name</dd>
+        <!-- Додайте інші властивості каталогу, якщо вони є -->
+    </dl>
+
+    <a asp-action="Save" asp-route-id="@Model.Id" asp-route-parentCatalogId="@Model.ParentCatalogId">Edit Catalog</a> 
+    <a asp-action="Delete" asp-route-id="@Model.Id" asp-route-pCId="@Model.ParentCatalogId">Delete Catalog</a>
+}
+else
+{
+    <p>Catalog not found.</p>
+}
+
+<a asp-action="GetCatalogs" asp-route-parentCatalogId="Model?.ParentCatalogId">Back to Catalogs</a>
