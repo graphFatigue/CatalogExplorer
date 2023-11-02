@@ -6,6 +6,7 @@ namespace BLL.Services
     public class FileImportService
     {
         private readonly IBaseRepository<Catalog> _catalogRepository;
+        private Dictionary<string, Catalog> _addedCatalogs;
 
         public FileImportService(IBaseRepository<Catalog> catalogRepository)
         {
@@ -51,8 +52,9 @@ namespace BLL.Services
             return catalogs;
         }
 
-        private IEnumerable<Catalog> ImportCatalogsFromFile(Stream fileStream, Catalog parentCatalog)
+        private IEnumerable<Catalog> ImportCatalogsFromFile(Stream fileStream, Catalog parentCatalog = null)
         {
+            _addedCatalogs = new Dictionary<string, Catalog>();
             var catalogs = new List<Catalog>();
 
             using (StreamReader reader = new StreamReader(fileStream))
@@ -60,43 +62,49 @@ namespace BLL.Services
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    // Розділяємо шлях за роздільниками \ або /
-                    string[] parts = line.Split('\\', '/');
-
-                    // Якщо є хоча б одна частина, створюємо каталог
-                    if (parts.Length >= 1)
-                    {
-                        var catalog = new Catalog
-                        {
-                            Name = parts[parts.Length - 1], // Остання частина - назва каталогу чи файлу
-                            ParentCatalog = parentCatalog,
-                            ParentCatalogId = parentCatalog?.Id
-                        };
-
-                        catalogs.Add(catalog);
-
-                        // Якщо шлях має більше однієї частини, можливо, потрібно створити батьківські каталоги
-                        if (parts.Length > 1)
-                        {
-                            for (int i = parts.Length - 2; i >= 0; i--)
-                            {
-                                var parent = new Catalog
-                                {
-                                    Name = parts[i],
-                                    ParentCatalog = catalog,
-                                    ParentCatalogId = catalog.Id
-                                };
-
-                                catalogs.Add(parent);
-                                catalog = parent;
-                            }
-                        }
-                    }
+                    AddCatalogToHierarchy(line, parentCatalog, catalogs);
                 }
             }
 
             return catalogs;
         }
+
+        private void AddCatalogToHierarchy(string path, Catalog parentCatalog, List<Catalog> catalogs)
+        {
+            var parts = path.Split('\\', '/');
+            if (parts.Length >= 1)
+            {
+                var catalogName = parts[0];
+                if (!_addedCatalogs.ContainsKey(catalogName))
+                {
+                    var catalog = new Catalog
+                    {
+                        Name = catalogName,
+                        ParentCatalog = parentCatalog,
+                        ParentCatalogId = parentCatalog?.Id
+                    };
+
+                    _addedCatalogs.Add(catalogName, catalog);
+                    catalogs.Add(catalog);
+
+                    if (parts.Length > 1)
+                    {
+                        var subPath = string.Join("\\", parts, 1, parts.Length - 1);
+                        AddCatalogToHierarchy(subPath, catalog, catalogs);
+                    }
+                }
+                else
+                {
+                    var existingCatalog = _addedCatalogs[catalogName];
+                    if (parts.Length > 1)
+                    {
+                        var subPath = string.Join("\\", parts, 1, parts.Length - 1);
+                        AddCatalogToHierarchy(subPath, existingCatalog, catalogs);
+                    }
+                }
+            }
+        }
+
 
 
         private async Task SaveCatalogsToDatabaseAsync(IEnumerable<Catalog> catalogs)
