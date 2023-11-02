@@ -9,9 +9,27 @@
             <a asp-controller="Catalog" asp-action="GetCatalog" asp-route-id="@catalog.Id">@catalog.Name</a>
             @if (catalog.ChildrenCatalogs != null && catalog.ChildrenCatalogs.Any())
             {
-                @Html.Partial("_CatalogRecursive", catalog.ChildrenCatalogs)
+                @Html.Partial("_CatalogRecursive", catalog.ChildrenCatalogs.OrderBy(c => c.Name))
             }
         </li>
     }
 </ul>
-<a asp-controller="Catalog" asp-action="Save" asp-route-id="0" asp-route-parentCatalogId="null">Create New Catalog</a>
+@* <a asp-controller="Catalog" asp-action="Save" asp-route-id="0" asp-route-parentCatalogId="null">Create New Catalog</a> *@
+
+
+<h2>Import Catalogs</h2>
+
+<form asp-action="ImportFromDirectory" method="post">
+    <label>Import from Directory:</label>
+    <input type="text" name="directoryPath" required />
+    <button type="submit">Import</button>
+</form>
+
+<form asp-action="ImportFromFile" method="post" enctype="multipart/form-data">
+    <label>Import from File:</label>
+    <input type="file" name="file" required />
+    <button type="submit">Import</button>
+</form>
+
+<h2>Catalogs</h2>
+

@@ -85,8 +85,9 @@ namespace CatalogExplorer.Controllers
         {
             var response = await _catalogService.DeleteCatalogAsync(id);
             if (response.StatusCode == Core.Enum.StatusCode.OK)
-            {
-                return RedirectToAction("GetCatalogs", "Catalog", new { parentCatalogId = pCId });
+            {   if (pCId!=null)
+                    return RedirectToAction("GetCatalog", "Catalog", new { id = pCId });
+                return RedirectToAction("Index", "Home");
             }
             return RedirectToAction("Error");
         }

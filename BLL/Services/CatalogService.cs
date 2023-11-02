@@ -3,7 +3,6 @@ using Core.Entity;
 using Core.Enum;
 using Core.Response;
 using DAL.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace BLL.Services
@@ -189,7 +188,7 @@ namespace BLL.Services
                         StatusCode = StatusCode.OK
                     };
                 }
-                catalogs = catalogs.OrderByDescending(o => o.Name).ToList();
+                catalogs = catalogs.OrderBy(o => o.Name).ToList();
                 return new BaseResponse<List<Catalog>>()
                 {
                     Data = (List<Catalog>)catalogs,

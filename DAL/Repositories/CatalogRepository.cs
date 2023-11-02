@@ -24,6 +24,7 @@ namespace DAL.Repositories
         public async Task CreateAsync(Catalog entity)
         {
             await _dbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Catalog entity)

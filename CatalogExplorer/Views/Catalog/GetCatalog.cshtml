@@ -9,8 +9,6 @@
         <dd>@Model.Name</dd>
         <!-- Додайте інші властивості каталогу, якщо вони є -->
     </dl>
-
-    <a asp-action="Save" asp-route-id="@Model.Id" asp-route-parentCatalogId="@Model.ParentCatalogId">Edit Catalog</a> 
     <a asp-action="Delete" asp-route-id="@Model.Id" asp-route-pCId="@Model.ParentCatalogId">Delete Catalog</a>
 }
 else
@@ -18,4 +16,25 @@ else
     <p>Catalog not found.</p>
 }
 
-<a asp-action="GetCatalogs" asp-route-parentCatalogId="Model?.ParentCatalogId">Back to Catalogs</a>
+@if (Model.ChildrenCatalogs != null && Model.ChildrenCatalogs.Any())
+{
+        <ul>
+            @foreach (var childCatalog in Model.ChildrenCatalogs)
+            {
+                <li>
+                    <a asp-action="GetCatalog" asp-route-id="@childCatalog.Id">@childCatalog.Name</a>
+                </li>
+            }
+        </ul>
+}
+
+else
+{
+    <p>No child catalogs found.</p>
+}
+
+@if (Model.ParentCatalog != null)
+{
+    <a asp-action="GetCatalog" asp-route-id="@Model.ParentCatalogId">Back to Parent Catalog</a>
+}
+
