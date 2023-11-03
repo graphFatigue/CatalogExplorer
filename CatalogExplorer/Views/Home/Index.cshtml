@@ -19,6 +19,12 @@
 
 <h2>Import Catalogs</h2>
 
+<form asp-action="ExportToTextFile" method="post">
+    <label>Import from Directory:</label>
+    <input type="text" name="filePath" required />
+    <button type="submit">Import</button>
+</form>
+
 <form asp-action="ImportFromDirectory" method="post">
     <label>Import from Directory:</label>
     <input type="text" name="directoryPath" required />
@@ -32,4 +38,3 @@
 </form>
 
 <h2>Catalogs</h2>
-

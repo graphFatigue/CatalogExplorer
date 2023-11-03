@@ -11,9 +11,9 @@ namespace CatalogExplorer.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ICatalogService _catalogService;
-        private readonly FileImportService _fileImportService;
+        private readonly IFileImportService _fileImportService;
 
-        public HomeController(ILogger<HomeController> logger, ICatalogService catalogService, FileImportService fileImportService)
+        public HomeController(ILogger<HomeController> logger, ICatalogService catalogService, IFileImportService fileImportService)
         {
             _logger = logger;
             _catalogService = catalogService;
@@ -55,7 +55,6 @@ namespace CatalogExplorer.Controllers
         {
             if (file == null || file.Length <= 0)
             {
-                // Обробляйте невірний вивантаження файлу і повертайте відповідну відповідь
                 return RedirectToAction(nameof(Index));
             }
 
@@ -66,5 +65,18 @@ namespace CatalogExplorer.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ExportToTextFileAsync(string filePath)
+        {
+            if (filePath == null || filePath.Length <= 0)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            await _fileImportService.ExportToTextFileAsync(filePath);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

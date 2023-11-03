@@ -1,9 +1,11 @@
-﻿using Core.Entity;
+﻿using BLL.Services.Interfaces;
+using Core.Entity;
 using DAL.Repositories.Interfaces;
+using System.IO;
 
 namespace BLL.Services
 {
-    public class FileImportService
+    public class FileImportService: IFileImportService
     {
         private readonly IBaseRepository<Catalog> _catalogRepository;
         private Dictionary<string, Catalog> _addedCatalogs;
@@ -11,6 +13,34 @@ namespace BLL.Services
         public FileImportService(IBaseRepository<Catalog> catalogRepository)
         {
             _catalogRepository = catalogRepository;
+        }
+
+        public async Task ExportToTextFileAsync(string filePath)
+        {
+            var catalogs = await _catalogRepository.GetAllAsync();
+            var lines = new List<string>();
+
+            foreach (var catalog in catalogs)
+            {
+                lines.Add(BuildCatalogPath(catalog));
+            }
+
+            //using (StreamWriter sr = new StreamWriter(filePath))
+            //{
+                await File.WriteAllLinesAsync(filePath, lines);
+            //}
+        }
+
+        private string BuildCatalogPath(Catalog catalog)
+        {
+            var pathParts = new List<string>();
+            while (catalog != null)
+            {
+                pathParts.Insert(0, catalog.Name);
+                catalog = catalog.ParentCatalog;
+            }
+
+            return string.Join("\\", pathParts);
         }
 
         public async Task ImportFromDirectoryAsync(string directoryPath)
@@ -104,8 +134,6 @@ namespace BLL.Services
                 }
             }
         }
-
-
 
         private async Task SaveCatalogsToDatabaseAsync(IEnumerable<Catalog> catalogs)
         {
