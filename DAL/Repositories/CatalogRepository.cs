@@ -1,11 +1,6 @@
 ﻿using Core.Entity;
 using DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
@@ -27,13 +22,20 @@ namespace DAL.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Catalog entity)
+        public async Task DeleteAsyncRecursive(Catalog entity)
         {
+            if (entity.ChildrenCatalogs.Any())
+            {
+                foreach (var child in entity.ChildrenCatalogs)
+                {
+                    await DeleteAsyncRecursive(child);
+                }
+            }
             _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Catalog>> GetAllAsync()
+    public async Task<IEnumerable<Catalog>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }

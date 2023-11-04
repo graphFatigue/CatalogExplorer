@@ -17,24 +17,23 @@
 @* <a asp-controller="Catalog" asp-action="Save" asp-route-id="0" asp-route-parentCatalogId="null">Create New Catalog</a> *@
 
 
-<h2>Import Catalogs</h2>
+<h2>Import/Export Catalogs</h2>
 
-<form asp-action="ExportToTextFile" method="post">
+<form asp-action="ExportToTextFile" style="margin:20px" method="post">
+    <label>Export to Text File:</label>
+    <input placeholder="enter filename" pattern="[a-z]{0}[0-9]{0}.{1-20}" type="text" name="filePath" required />
+    <button type="submit">Export</button>
+</form>
+
+<form asp-action="ImportFromDirectory" style="margin:20px" method="post">
     <label>Import from Directory:</label>
-    <input type="text" name="filePath" required />
+    <input placeholder="enter path" type="text" name="directoryPath" required />
     <button type="submit">Import</button>
 </form>
 
-<form asp-action="ImportFromDirectory" method="post">
-    <label>Import from Directory:</label>
-    <input type="text" name="directoryPath" required />
-    <button type="submit">Import</button>
-</form>
-
-<form asp-action="ImportFromFile" method="post" enctype="multipart/form-data">
+<form asp-action="ImportFromFile" method="post" style="margin:20px" enctype="multipart/form-data">
     <label>Import from File:</label>
     <input type="file" name="file" required />
     <button type="submit">Import</button>
 </form>
 
-<h2>Catalogs</h2>

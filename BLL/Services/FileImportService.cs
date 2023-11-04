@@ -24,11 +24,7 @@ namespace BLL.Services
             {
                 lines.Add(BuildCatalogPath(catalog));
             }
-
-            //using (StreamWriter sr = new StreamWriter(filePath))
-            //{
                 await File.WriteAllLinesAsync(filePath, lines);
-            //}
         }
 
         private string BuildCatalogPath(Catalog catalog)
@@ -66,6 +62,13 @@ namespace BLL.Services
                 ParentCatalog = parentCatalog,
                 ParentCatalogId = parentCatalog?.Id
             };
+
+            //var catalogsVerify = _catalogRepository.GetAllAsync();
+            //var count = catalogsVerify.Where(x => x.Name == model.Name && x.ParentCatalogId == model.ParentCatalogId).Count();
+            //if (count != 0)
+            //{
+            //    throw new Exception("Can't create catalog with existing name");
+            //}
 
             catalogs.Add(currentCatalog);
 

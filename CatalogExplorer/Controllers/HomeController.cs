@@ -46,7 +46,10 @@ namespace CatalogExplorer.Controllers
         [HttpPost]
         public async Task<IActionResult> ImportFromDirectoryAsync(string directoryPath)
         {
-            await _fileImportService.ImportFromDirectoryAsync(directoryPath);
+            if (Directory.Exists(directoryPath))
+            {
+                await _fileImportService.ImportFromDirectoryAsync(directoryPath);
+            }
             return RedirectToAction(nameof(Index));
         }
 
@@ -72,6 +75,11 @@ namespace CatalogExplorer.Controllers
             if (filePath == null || filePath.Length <= 0)
             {
                 return RedirectToAction(nameof(Index));
+            }
+
+            if (!filePath.EndsWith(".txt"))
+            {
+                filePath = filePath + ".txt";
             }
 
             await _fileImportService.ExportToTextFileAsync(filePath);

@@ -31,7 +31,7 @@ namespace DAL.Configuration
                 .HasOne(s => s.ParentCatalog)
                 .WithMany(x => x.ChildrenCatalogs)
                 .HasForeignKey(s => s.ParentCatalogId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.ClientCascade);
         }
     }
 }

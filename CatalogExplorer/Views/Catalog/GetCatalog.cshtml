@@ -1,15 +1,16 @@
 ﻿@model Core.Entity.Catalog
 
-<h2>Catalog Details</h2>
+
 
 @if (Model != null)
 {
+    <h2>Folder "@Model.Name"</h2>
     <dl>
-        <dt>Name:</dt>
-        <dd>@Model.Name</dd>
-        <!-- Додайте інші властивості каталогу, якщо вони є -->
+@*         <dt>Name:</dt>
+        <dd style="margin-right:60px">@Model.Name</dd> *@
+        <a asp-action="Delete" asp-route-id="@Model.Id" asp-route-pCId="@Model.ParentCatalogId">Delete Catalog</a>
     </dl>
-    <a asp-action="Delete" asp-route-id="@Model.Id" asp-route-pCId="@Model.ParentCatalogId">Delete Catalog</a>
+    
 }
 else
 {
@@ -18,7 +19,7 @@ else
 
 @if (Model.ChildrenCatalogs != null && Model.ChildrenCatalogs.Any())
 {
-        <ul>
+        <ul style="margin-top:20px">
             @foreach (var childCatalog in Model.ChildrenCatalogs)
             {
                 <li>
@@ -35,6 +36,9 @@ else
 
 @if (Model.ParentCatalog != null)
 {
+    
     <a asp-action="GetCatalog" asp-route-id="@Model.ParentCatalogId">Back to Parent Catalog</a>
 }
+
+
 

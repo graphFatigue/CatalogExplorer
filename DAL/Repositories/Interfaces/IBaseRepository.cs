@@ -12,6 +12,6 @@ namespace DAL.Repositories.Interfaces
         Task<TEntity?> GetByIdAsync(int id);
         Task CreateAsync(TEntity entity);
         Task<TEntity> UpdateAsync(TEntity entity);
-        Task DeleteAsync(TEntity entity);
+        Task DeleteAsyncRecursive(TEntity entity);
     }
 }
