@@ -2,8 +2,8 @@
 using Core.Entity;
 using Core.Enum;
 using Core.Response;
+using DAL;
 using DAL.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace BLL.Services
@@ -11,10 +11,12 @@ namespace BLL.Services
     public class CatalogService : ICatalogService
     {
         private readonly IBaseRepository<Catalog> _catalogRepository;
+        private readonly AppDbContext _context;
 
-        public CatalogService(IBaseRepository<Catalog> catalogRepository)
+        public CatalogService(IBaseRepository<Catalog> catalogRepository, AppDbContext context)
         {
             _catalogRepository = catalogRepository;
+            _context = context;
         }
 
         public async Task<IBaseResponse<Catalog>> CreateAsync(Catalog model)
@@ -26,6 +28,12 @@ namespace BLL.Services
                     Name = model.Name,
                     ParentCatalogId = model.ParentCatalogId,    
                 };
+                var catalogs = await _catalogRepository.GetAllAsync();
+                var count = catalogs.Where(x => x.Name == model.Name && x.ParentCatalogId == model.ParentCatalogId).Count();
+                if (count!=0)
+                {
+                    throw new Exception("Can't create catalog with existing name");
+                }
                 await _catalogRepository.CreateAsync(catalog);
 
                 return new BaseResponse<Catalog>()
@@ -59,7 +67,7 @@ namespace BLL.Services
                     };
                 }
 
-                await _catalogRepository.DeleteAsync(catalog);
+                await _catalogRepository.DeleteAsyncRecursive(catalog);
 
                 return new BaseResponse<bool>()
                 {
@@ -189,7 +197,7 @@ namespace BLL.Services
                         StatusCode = StatusCode.OK
                     };
                 }
-                catalogs = catalogs.OrderByDescending(o => o.Name).ToList();
+                catalogs = catalogs.OrderBy(o => o.Name).ToList();
                 return new BaseResponse<List<Catalog>>()
                 {
                     Data = (List<Catalog>)catalogs,

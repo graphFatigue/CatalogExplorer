@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231031190436_Initial")]
+    [Migration("20231103153925_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -108,7 +108,7 @@ namespace DAL.Migrations
                     b.HasOne("Core.Entity.Catalog", "ParentCatalog")
                         .WithMany("ChildrenCatalogs")
                         .HasForeignKey("ParentCatalogId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.ClientCascade);
 
                     b.Navigation("ParentCatalog");
                 });

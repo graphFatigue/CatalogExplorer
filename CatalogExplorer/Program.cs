@@ -15,6 +15,7 @@ builder.Services.AddControllersWithViews();
 //builder.Services.ConfigureDataAccessLayer();
 builder.Services.AddScoped<IBaseRepository<Catalog>, CatalogRepository>();
 builder.Services.AddScoped<ICatalogService, CatalogService>();
+builder.Services.AddScoped<IFileImportService,FileImportService>();
 
 var app = builder.Build();
 

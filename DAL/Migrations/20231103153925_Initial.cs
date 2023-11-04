@@ -28,8 +28,7 @@ namespace DAL.Migrations
                         name: "FK_catalogs_catalogs_parent_catalog_id",
                         column: x => x.parent_catalog_id,
                         principalTable: "catalogs",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.InsertData(

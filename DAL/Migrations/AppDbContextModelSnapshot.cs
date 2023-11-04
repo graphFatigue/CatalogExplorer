@@ -105,7 +105,7 @@ namespace DAL.Migrations
                     b.HasOne("Core.Entity.Catalog", "ParentCatalog")
                         .WithMany("ChildrenCatalogs")
                         .HasForeignKey("ParentCatalogId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.ClientCascade);
 
                     b.Navigation("ParentCatalog");
                 });
